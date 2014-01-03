@@ -97,9 +97,7 @@ class CurlHandle
         }
 
         // Specify settings according to the HTTP method
-        if ($method == 'GET') {
-            $curlOptions[CURLOPT_HTTPGET] = true;
-        } elseif ($method == 'HEAD') {
+        if ($method == 'HEAD') {
             $curlOptions[CURLOPT_NOBODY] = true;
             // HEAD requests do not use a write function
             unset($curlOptions[CURLOPT_WRITEFUNCTION]);
