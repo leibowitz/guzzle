@@ -205,7 +205,7 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
                 CURLOPT_CONNECTTIMEOUT => 150,
                 CURLOPT_WRITEFUNCTION => 'callback',
                 CURLOPT_HEADERFUNCTION => 'callback',
-                CURLOPT_HTTPHEADER => array('Accept:', 'Host: www.google.com', 'User-Agent: ' . $userAgent),
+                CURLOPT_HTTPHEADER => array('Expect:', 'Accept:', 'Host: www.google.com', 'User-Agent: ' . $userAgent),
             )),
             // Test that custom request methods can be used
             array('TRACE', 'http://www.google.com/', null, null, array(
@@ -219,7 +219,7 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
                 CURLOPT_WRITEFUNCTION => 'callback',
                 CURLOPT_HEADERFUNCTION => 'callback',
                 CURLOPT_PORT => 8080,
-                CURLOPT_HTTPHEADER => array('Accept:', 'Host: 127.0.0.1:8080', 'User-Agent: ' . $userAgent),
+                CURLOPT_HTTPHEADER => array('Expect:', 'Accept:', 'Host: 127.0.0.1:8080', 'User-Agent: ' . $userAgent),
             )),
             // Send a HEAD request
             array('HEAD', 'http://www.google.com/', null, null, array(
@@ -238,6 +238,7 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
                 CURLOPT_WRITEFUNCTION => 'callback',
                 CURLOPT_HEADERFUNCTION => 'callback',
                 CURLOPT_HTTPHEADER => array(
+                    'Expect:',
                     'Accept:',
                     'Host: localhost',
                     'Authorization: Basic ' . $auth,
@@ -251,6 +252,7 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
             ), null, array(
                 CURLOPT_PORT => 8124,
                 CURLOPT_HTTPHEADER => array(
+                    'Expect:',
                     'Accept:',
                     'Host: localhost:8124',
                     'x-test-data: Guzzle',
@@ -259,7 +261,8 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
             ), array(
                 'Host'             => '*',
                 'User-Agent'       => '*',
-                'x-test-data'      => 'Guzzle'
+                'x-test-data'      => 'Guzzle',
+                'Content-Length'   => 0
             )),
             // Send a POST using a query string
             array('POST', 'http://localhost:8124/post.php', null, $qs, array(
@@ -459,7 +462,7 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
                 CURLOPT_CONNECTTIMEOUT => 150,
                 CURLOPT_WRITEFUNCTION => 'callback',
                 CURLOPT_HEADERFUNCTION => 'callback',
-                CURLOPT_HTTPHEADER => array('Accept:', 'Host: www.google.com', 'User-Agent: ' . $userAgent),
+                CURLOPT_HTTPHEADER => array('Expect:', 'Accept:', 'Host: www.google.com', 'User-Agent: ' . $userAgent),
             )),
         );
 

@@ -139,7 +139,7 @@ class Response extends AbstractMessage implements \Serializable
     {
         parent::__construct();
         $this->setStatus($statusCode);
-        $this->body = EntityBody::factory($body !== null ? $body : '');
+        $this->setBody($body);
 
         if ($headers) {
             if (is_array($headers)) {
@@ -196,7 +196,7 @@ class Response extends AbstractMessage implements \Serializable
      */
     public function setBody($body)
     {
-        $this->body = EntityBody::factory($body);
+        $this->body = EntityBody::factory($body !== null ? $body : '');
 
         return $this;
     }

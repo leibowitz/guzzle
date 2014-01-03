@@ -57,7 +57,7 @@ class EntityEnclosingRequest extends Request implements EntityEnclosingRequestIn
 
     public function setBody($body, $contentType = null)
     {
-        $this->body = EntityBody::factory($body);
+        $this->body = EntityBody::factory($body !== null ? $body : '');
 
         // Auto detect the Content-Type from the path of the request if possible
         if ($contentType === null && !$this->hasHeader('Content-Type')) {

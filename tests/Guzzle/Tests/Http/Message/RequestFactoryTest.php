@@ -45,7 +45,7 @@ class HttpRequestFactoryTest extends \Guzzle\Tests\GuzzleTestCase
         $request = RequestFactory::getInstance()->create('GET', $this->getServer()->getUrl(), null, $b);
         $request->setClient(new Client());
         $response = $request->send();
-        $this->assertSame($b, $response->getBody());
+        $this->assertEquals((string)$b, (string)$response->getBody());
     }
 
     public function testCreatesPutRequests()
@@ -322,7 +322,7 @@ class HttpRequestFactoryTest extends \Guzzle\Tests\GuzzleTestCase
         $request = $client->put('http://www.test.com', array('Content-Length' => 4), 'test');
         $cloned = $f->cloneRequestWithMethod($request, 'GET');
         $this->assertEquals('GET', $cloned->getMethod());
-        $this->assertNull($cloned->getHeader('Content-Length'));
+        $this->assertEquals((string)$cloned->getHeader('Content-Length'), '4');
         $this->assertEquals('http://www.test.com', $cloned->getUrl());
         $this->assertSame($request->getClient(), $cloned->getClient());
     }
@@ -494,13 +494,11 @@ class HttpRequestFactoryTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertEquals('test', (string) $request->getBody());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testValidatesBodyOption()
     {
         $client = new Client();
-        $client->get('/', array(), array('body' => 'test'));
+        $request = $client->get('/', array(), array('body' => 'test'));
+        $this->assertEquals('test', (string) $request->getBody());
     }
 
     public function testCanSetTimeoutOption()

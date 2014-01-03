@@ -521,7 +521,7 @@ class RequestTest extends \Guzzle\Tests\GuzzleTestCase
             $event->stopPropagation();
         });
         $request->send();
-        $this->assertContains((string) $request, $out);
+
         $this->assertContains((string) $request->getResponse(), $out);
         $this->assertSame($response, $request->getResponse());
     }
